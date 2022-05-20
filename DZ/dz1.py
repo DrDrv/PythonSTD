@@ -43,3 +43,16 @@ def multirow(N):
     return array
 
 print(multirow(4))
+
+# Подсчитать сумму цифр в вещественном числе.
+print(f"+++- Задача 4 -+++")
+
+def summelements(V):
+    print(f"Входящее число V = {V}")
+    summel = 0
+    for i in range(len(str(V))):
+        if str(V)[i].isdigit():
+            summel += int(str(V)[i])
+    return summel
+
+print(f"Сумма всех числе входящего вещественного числа = {summelements(23.140007224)}")

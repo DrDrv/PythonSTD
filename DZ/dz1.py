@@ -1,11 +1,9 @@
 # Сформировать список из N членов последовательности. Для N = 5: 1, -3, 9, -27, 81 и т.д.
 print(f"+++- Задача 1 -+++")
 def swing(N):
-    rezultat = ''
+    rezultat = []
     for i in range(0,N):
-        if (i%2 == 0): sign = 1
-        else: sign = -1
-        rezultat += f"{sign * 3**i}, "
+        rezultat.append((-3)**i)
     return(rezultat)
 
 print(swing(5))
@@ -15,17 +13,17 @@ print(f"+++- Задача 2 -+++")
 def findtext(element,text):
     count = 0   # счетчик вхождений
     i = 0       # счетчик элементов для цикла
-    lentext = len(text)     # Длина строки текста поиска
-    lenelement = len(element)       # длина искомой строки
-    while i < (lentext-lenelement+1):
-        if element == text[i:i+lenelement]:
+    len_text = len(text)     # Длина строки текста поиска
+    len_element = len(element)       # длина искомой строки
+    while i < (len_text-len_element+1):
+        if element == text[i:i+len_element]:
             count += 1
-            i = i + lenelement
+            i = i + len_element
             print(f"        Номер элемента вхождения в искомом тексте - {i}")
         else: i += 1
     return count
 
-print(f"Число вхождений - {findtext('11','4w9579309450923411117656757616717657657611')}")
+print(f"Число вхождений - {findtext('11','4w95793094509234111117656757616717657657611')}")
 
 # Написать программу получающую набор произведений чисел от 1 до N.
 # Пример: пусть N = 4, тогда
@@ -50,9 +48,9 @@ print(f"+++- Задача 4 -+++")
 def summelements(V):
     print(f"Входящее число V = {V}")
     summel = 0
-    for i in range(len(str(V))):
-        if str(V)[i].isdigit():
-            summel += int(str(V)[i])
+    for i in str(V):
+        if i.isdigit():
+            summel += int(i)
     return summel
 
-print(f"Сумма всех числе входящего вещественного числа = {summelements(23.140007224)}")
+print(f"Сумма всех числе входящего вещественного числа = {summelements(23.141)}")

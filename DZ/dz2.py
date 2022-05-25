@@ -34,18 +34,18 @@ print('---= Задача 3 =---')
 float_list = [1.1, 1.2, 3.1, 5, 10.01]    # Входной список
 
 def compare_para(d_list):
-    lenght_list = len(d_list)          # Количество элементов списка
     for i in range(0,len(d_list)):
-        if d_list[i]%1 != 0: 
-            d_list[i] = float( '0.' + (str(d_list[i]).split('.'))[1]) 
+        if d_list[i]%1 != 0:                # данное условие отсекает целые числа
+            d_list[i] = float( '0.' + (str(d_list[i]).split('.'))[1])  # Для сохранения нормального вида вещественного числа в результате - я входящее число принял строкой и 
+                                                                        # разделил по точке на целую и дробную часть. Взяв только дробную часть, строкой добавил 
+                                                                        # вначало "0." и ковертировал в вещественное число. Результат: все целые части вещественного
+                                                                        # числа стали равны "0":  [0.1, 0.2, 0.1, 0.01]                                        
             if i == 0:
                 max = d_list[i]
                 min = d_list[i]
-            if max < d_list[i]:
-                max = d_list[i]
-            if min > d_list[i]:
-                min = d_list[i]    
-    return [max-min]
+            if max < d_list[i]: max = d_list[i]
+            if min > d_list[i]: min = d_list[i]    
+    return max-min
 
 print(f' Входной список - {float_list}')
 print(f' Результат - {compare_para(float_list)}')

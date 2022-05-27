@@ -1,15 +1,25 @@
 # 1. Найти НОК двух чисел
-
-number_a = 12    # Входные данные
-number_b = 45
+print('---= Задача 1 =---')
+number_a = 111    # Входные данные
+number_b = 12
 
 def multi_nok(na, nb):
-    min = na
-    if na>nb: min = nb
+    mn = min(na,nb)
+    if mn == 0: return ('Не существует')
+    mn = max(na,nb)
     while True:
-        if min%na == 0 and min%nb == 0:
-            return min
-        min += 1
+        if mn%na == 0 and mn%nb == 0:
+            return mn
+        mn += 1
 
-print(multi_nok(number_a, number_b))
+print(f'Для чисел {number_a} и {number_b} НОК  =  {multi_nok(number_a, number_b)}')
 
+#Вычислить число  c заданной точностью d
+#     Пример: при d = 0.001,  c= 3.141.
+
+print('---= Задача 2 =---')
+
+n = 5
+a = 1.2345678912345
+template = '{:.' + str(n) + 'f}'
+print(template.format(a))

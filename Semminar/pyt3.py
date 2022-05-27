@@ -47,10 +47,49 @@ print(multi_index(num))
 
 # Дано число. Составить список чисел Фибоначчи, в том числе для отрицательных индексов.
 # Т е для k = 8, список будет выглядеть так: [-21 ,13, -8, 5, −3,  2, −1,  1, 0, 1, 1, 2, 3, 5, 8, 13, 21] Негафибоначчи
+print('---= Задача 2 =---')
+def fibb(n):
+    if n in [0]:
+        return 0
+    elif n in [1,2,-1]:
+        return 1
+    elif n in [-2]:
+        return -1
+    elif n > 2:
+        return fibb(n-1) + fibb(n-2)
+    elif n < -2:
+        return fibb(n+2) - fibb(n+1) 
+
+list = []
+k = 8
+for e in range (-k, k+1):
+    list.append(fibb(e))
+print(list)
 
 """
-:param: 
+Вывод программы
+---= Задача 2 =---
+[-21, 13, -8, 5, -3, 2, -1, 1, 0, 1, 1, 2, 3, 5, 8, 13, 21]
 """
 
 # Строка содержит набор чисел. Показать большее и меньшее число
 # Символ-разделитель - пробел
+print('---= Задача 3 =---')
+print(list_values)
+
+def find_min_max(f_list):
+    length_list = len(f_list)
+    min, max = f_list[0], f_list[0]
+    for k in f_list:
+        if k < min: min = k
+        if k > max: max = k
+    return [min, max]
+
+
+print(f'Минимум и максимум списка: {find_min_max(list_values)}')
+"""
+Вывод программы:
+---= Задача 3 =---
+[-7, 1, -3, 9, 2, 4, -6, -5, -5, -4]
+Минимум и максимум списка: [-7, 9]
+"""

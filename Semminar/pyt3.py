@@ -13,17 +13,17 @@ def generator_file(N):
         for i in range(N):
             file.write(str(random.randint(0,N-1)) + '\n')
 
-def multi_index(N):
+def multi_index(N, values):
     mult_i = 1
     with open('file_pyt3.txt','r') as file:
         for i in file:
-            mult_i *= list_values[int(i)]
+            mult_i *= values[int(i)]
     return mult_i
 
 list_values = generator_list(num)
 print(list_values)
 generator_file(num)
-print(multi_index(num))
+print(multi_index(num,list_values))
 
 
 """

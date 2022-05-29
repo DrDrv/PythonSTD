@@ -1,7 +1,7 @@
 # 1. Найти НОК двух чисел
 print('---= Задача 1 =---')
-number_a = 111    # Входные данные
-number_b = 12
+number_a = 24    # Входные данные
+number_b = 14
 
 def multi_nok(na, nb):
     mn = min(na,nb)
@@ -34,8 +34,8 @@ print(number_pi(0.001))
 
 # Составить список простых множителей натурального числа N
 print('---= Задача 3 =---')
-number_N = 12
-print(f'простые множители для числа {number_N}')
+number_n = 171
+print(f'простые множители для числа {number_n}')
 
 def simple_mult(N):
     if N in [2,3,5,7]:
@@ -48,12 +48,16 @@ def simple_mult(N):
     if N%5 == 0: return simple_mult(N/5)
     if N%7 == 0: return simple_mult(N/7)
 
-list = []
-while number_N != 1:
-    funk_rez = int(simple_mult(number_N))
-    list.append(funk_rez)
-    number_N = (number_N/funk_rez)
-print(list)
+def simple_numb(number_N):
+    list = []
+    while number_N != 1:
+        funk_rez = int(simple_mult(number_N))
+        list.append(funk_rez)
+        number_N = (number_N/funk_rez)
+    print(list)
+    return(list)
+
+simple_numb(number_n)
 
 # Дана последовательность чисел. Получить список неповторяющихся элементов исходной последовательности
 # Пример: [1, 2, 3, 5, 1, 5, 3, 10] => [1, 2, 3, 5, 10]
@@ -95,3 +99,20 @@ def del_krat_two(file_in):
 
 int_number_list('file_dz3.txt')
 del_krat_two('file_dz3.txt')
+
+
+print('---= Задача 1 Расширенная версия=---')
+# поиск простых множителей
+list_numbera = simple_numb(number_a) 
+list_numberb = simple_numb(number_b)
+# Убираем дубликаты из списков простых множителей
+for l in list_numbera:
+    for k in list_numberb:
+        if l == k: list_numberb.remove(k)
+# Получаем один общий список множителей объединением
+list_num_c = list_numbera + list_numberb
+rez = 1
+# Находим НОК
+for g in list_num_c:
+    rez *= g
+print(f' Для чисел {number_a} и {number_b} НОК является {rez}')

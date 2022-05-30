@@ -35,7 +35,7 @@ print(number_pi(0.001))
 # Составить список простых множителей натурального числа N
 print("")
 print('---= Задача 3 =---')
-number_n = 171
+number_n = 2047
 print(f'простые множители для числа {number_n}')
 
 def simple_mult(N):
@@ -81,7 +81,7 @@ def int_number_list(file_in):
     N = 10                                  # Число целых цифр
     with open(file_in,'w') as file:
         for i in range(N):                  
-            file.write(str(random.randint(0,N-1)) + '\n')
+            file.write(str(random.randint(1,N-1)) + '\n')
     print('содержимое входящего файла: ')
     with open(file_in,'r') as file:
         for i in file:

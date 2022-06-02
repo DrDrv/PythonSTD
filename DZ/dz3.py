@@ -16,7 +16,7 @@ print(f'Для чисел {number_a} и {number_b} НОК  =  {multi_nok(number_
 
 #Вычислить число  c заданной точностью d
 #     Пример: при d = 0.001,  c= 3.141.
-
+print("")
 print('---= Задача 2 =---')
 def number_pi(delta):   # дельта это точность
     num_cols = 1 # Номер члена послесдовательности расчета числа Пи
@@ -33,8 +33,9 @@ def number_pi(delta):   # дельта это точность
 print(number_pi(0.001))
 
 # Составить список простых множителей натурального числа N
+print("")
 print('---= Задача 3 =---')
-number_n = 1025
+number_n = 2047
 print(f'простые множители для числа {number_n}')
 
 def simple_mult(N):
@@ -61,6 +62,7 @@ simple_numb(number_n)
 
 # Дана последовательность чисел. Получить список неповторяющихся элементов исходной последовательности
 # Пример: [1, 2, 3, 5, 1, 5, 3, 10] => [1, 2, 3, 5, 10]
+print("")
 print('---= Задача 4 =---')
 list_in = [1, 2, 3, 5, 1, 5, 3, 10]
 print(f'Входящий список {list_in}')
@@ -72,13 +74,14 @@ while i >= 0:
 print(f' Результат {list_in}')
 
 # Дан текстовый файл, содержащий целые числа. Удалить из него все четные числа. 
+print("")
 print('---= Задача 5 =---')
 import random
 def int_number_list(file_in):
     N = 10                                  # Число целых цифр
     with open(file_in,'w') as file:
         for i in range(N):                  
-            file.write(str(random.randint(0,N-1)) + '\n')
+            file.write(str(random.randint(1,N-1)) + '\n')
     print('содержимое входящего файла: ')
     with open(file_in,'r') as file:
         for i in file:
@@ -100,8 +103,8 @@ def del_krat_two(file_in):
 int_number_list('file_dz3.txt')
 del_krat_two('file_dz3.txt')
 
-
-print('---= Задача 1 Расширенная версия=---')
+print("")
+print('---= Задача 1 Расширенная версия =---')
 # поиск простых множителей
 list_numbera = simple_numb(number_a) 
 list_numberb = simple_numb(number_b)
@@ -116,3 +119,22 @@ rez = 1
 for g in list_num_c:
     rez *= g
 print(f' Для чисел {number_a} и {number_b} НОК является {rez}')
+
+# Найдите разность между суммой квадратов и квадратом суммы первых ста натуральных чисел.
+print("")
+print('---= Задача 4 EX =---')
+n_element = 100
+def summ_kvad(N):
+    rez = 0
+    for i in range(1, N+1):
+        rez += i**2
+    return rez
+def kvad_summ(N):
+    rez = 0
+    for i in range(1, N+1):
+        rez += i
+    return rez**2
+
+kvs = kvad_summ(n_element)      # Квадрат суммы
+skv = summ_kvad(n_element)      # Сумма квадратов
+print(f'Для {n_element} элементов разность квадрата суммы {kvs} и суммы квадратов {skv} = {kvs-skv} ')

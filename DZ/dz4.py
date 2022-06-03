@@ -66,6 +66,7 @@ with open(filename,'w') as f:
     f.write("\n".join(map(str,in_list)))
 
 # Из предыдущего ДЗ - я не понимаю - делаем чтение файла или работаем со списком???? 
+
 def bubble_sort(lst):          # Сортировка пузырком - ничего нового 
     
     #swapped = False
@@ -76,4 +77,8 @@ def bubble_sort(lst):          # Сортировка пузырком - нич�
 
     return lst
 
-print(bubble_sort(in_list))
+in_list = bubble_sort(in_list)
+print(in_list)
+
+with open(filename,'w') as f:
+    f.write("\n".join(map(str,in_list)))

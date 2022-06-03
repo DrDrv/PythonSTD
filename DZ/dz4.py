@@ -67,6 +67,9 @@ with open(filename,'w') as f:
 
 # Из предыдущего ДЗ - я не понимаю - делаем чтение файла или работаем со списком???? 
 
+with open(filename,'r') as f:
+    in_list = list(map(int, f.readlines()))
+    
 def bubble_sort(lst):          # Сортировка пузырком - ничего нового 
     
     #swapped = False

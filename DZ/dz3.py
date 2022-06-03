@@ -18,28 +18,29 @@ print(f'Для чисел {number_a} и {number_b} НОК  =  {multi_nok(number_
 #     Пример: при d = 0.001,  c= 3.141.
 print("")
 print('---= Задача 2 =---')
-def faktorial(N):
-    if N <= 1: return 1
-    return rez *= faktorial(N-1)
-    
+
+def factorial(n):
+    fact = 1
+    for num in range(2, n + 1):
+        fact = fact * num
+    return(fact)
+
 def number_pi(delta):   # дельта это точность
-    num_cols = 1 # Номер члена послесдовательности расчета числа Пи
-    num_pi = 0  # Число Пи
-    element = 0 # значение элемента последовательности
-    faktor6 = 1
-    for i in range(delta**(-1)):
-        faktor6 *= 6*k
-
-        element += (-1)**i * faktor6*(13591409 + 545140134*k)
-
-    
-    # while element >= delta:
-    #     element += #1/(2*num_cols -1)
-    #     # if num_cols%2 == 0: num_pi -= element
-    #     # else: num_pi += element
-    #     num_cols += 1
-    # num_pi *= 4
-    return (num_pi)
+    i = 1
+    a = 13591409
+    b = 545140134
+    c = 640320
+    d = c ** (3/2)
+    summ_elements = a/d # т.к. при i = 0 получаем деление на ноль в формуле, а факториал от нуля равен 1, то первый элемент будет равен a/d
+    while i < 10:       # При первом прохождении c i=1 алгоритма мы уже получаем большую точность числа Пи, а максимальное количество прохождения алгоритма
+                        # У меня дало при i = 17 и смысл точности 0,001 пропадает, т.к. полученная точность больше
+        formula_pi = ((-1)**i * factorial(6*i) * (a + b*i) / 
+            (factorial(3*i) * factorial(i) ** 3 * c**(3*i) * d))
+        summ_elements += formula_pi
+        i += 1
+    ss = 1 / (12*summ_elements)
+    print(ss)
+    return (ss)
 
 print(number_pi(0.001))
 
@@ -149,3 +150,9 @@ def kvad_summ(N):
 kvs = kvad_summ(n_element)      # Квадрат суммы
 skv = summ_kvad(n_element)      # Сумма квадратов
 print(f'Для {n_element} элементов разность квадрата суммы {kvs} и суммы квадратов {skv} = {kvs-skv} ')
+
+# Решение с коротой записью что является тем же самым
+def kv_summt(n):  
+    return sum([ i for i in range(1,n+1)])**2 - sum([i**2 for i in range(1,n+1)])
+
+print(kv_summt(n_element))

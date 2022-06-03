@@ -37,7 +37,7 @@ def split_list(li):
             lo.append(loi)
     return lo
 rezultat = split_list(list_in)
-print(f'Возрастающие последовательности {rezultat}')            # Вернули все найденные последовательности в файл
+print(f'Возрастающие последовательности {rezultat}')            # Вернули все найденные последовательности в список
 
 
 

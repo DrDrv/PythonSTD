@@ -18,16 +18,27 @@ print(f'Для чисел {number_a} и {number_b} НОК  =  {multi_nok(number_
 #     Пример: при d = 0.001,  c= 3.141.
 print("")
 print('---= Задача 2 =---')
+def faktorial(N):
+    if N <= 1: return 1
+    return rez *= faktorial(N-1)
+    
 def number_pi(delta):   # дельта это точность
     num_cols = 1 # Номер члена послесдовательности расчета числа Пи
     num_pi = 0  # Число Пи
-    element = 1 # значение элемента последовательности
-    while element >= delta:
-        element = 1/(2*num_cols -1)
-        if num_cols%2 == 0: num_pi -= element
-        else: num_pi += element
-        num_cols += 1
-    num_pi *= 4
+    element = 0 # значение элемента последовательности
+    faktor6 = 1
+    for i in range(delta**(-1)):
+        faktor6 *= 6*k
+
+        element += (-1)**i * faktor6*(13591409 + 545140134*k)
+
+    
+    # while element >= delta:
+    #     element += #1/(2*num_cols -1)
+    #     # if num_cols%2 == 0: num_pi -= element
+    #     # else: num_pi += element
+    #     num_cols += 1
+    # num_pi *= 4
     return (num_pi)
 
 print(number_pi(0.001))

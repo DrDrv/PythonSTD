@@ -2,8 +2,8 @@
 in_text = 'Жили были дед, баба и абвешка, в абв-какой деревушке. Решила абвешка пойти крутабвернуться и абвернулась.'
 
 data = list(map(str,in_text.split()))
-list_out = [data.remove(i) for i in data \
-    i.split('абв')]
+# list_out = [data.remove(i) for i in data \
+#     i.split('абв')]
 print(data)
 
 #def s

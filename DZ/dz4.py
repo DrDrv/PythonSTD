@@ -56,7 +56,7 @@ import random
 
 filename = 'file_dz4.txt'
 
-# ВВод первоначальных данных - И запись в файл 
+# # ВВод первоначальных данных - И запись в файл 
 in_list = []
 for i in range(20):                  
     in_list.append(random.randint(1,50))
@@ -65,7 +65,7 @@ print(in_list)
 with open(filename,'w') as f:
     f.write("\n".join(map(str,in_list)))
 
-# Из предыдущего ДЗ - я не понимаю - делаем чтение файла или работаем со списком???? 
+# # Из предыдущего ДЗ - я не понимаю - делаем чтение файла или работаем со списком???? 
 
 with open(filename,'r') as f:
     in_list = list(map(int, f.readlines()))

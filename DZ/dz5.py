@@ -1,23 +1,68 @@
 # 1. Напишите программу, удаляющую из текста все слова содержащие "абв". Используйте знания с последней лекции. Выполните ее в виде функции. 
 from gettext import find
 
+# in_text = 'абвгдеж рабав копыто фабв Абкн абрыволк аБволк'
+# text = 'абв'
+# print(f'Исходная строка: \t {in_text}')
+# print(f'Искомый текст: \t\t {text}')
 
-in_text = 'абвгдеж рабав копыто фабв Абкн абрыволк аБволк'
-text = 'абв'
-print(f'Исходная строка: \t {in_text}')
-print(f'Искомый текст: \t\t {text}')
+# def nega_text(in_t, txt):
+#     data = list(map(str,in_t.split()))
+#     data = [i for i in data if (i.lower()).find(txt) == -1]
+#     data = ' '.join(data)
+#     return data
 
-def nega_text(in_t, txt):
-    data = list(map(str,in_t.split()))
-    data = [i for i in data if (i.lower()).find(txt) == -1]
-    data = ' '.join(data)
-    return data
-
-print(f'Результат: \t\t {nega_text(in_text,text)}')
+# print(f'Результат: \t\t {nega_text(in_text,text)}')
 
 
 # 2. Вы когда-нибудь играли в игру "Крестики-нолики"? Попробуйте создать её, причем чтобы сыграть в нее можно было в одиночку. 
+print(' ================================')
+print('Крестики - нолики')
+print('')
 
+pole = '*********'                                  # Поле - 9 ячеек, хотел списком, но мороки с проверкой много
+step = 1                                            # Ходы - разделяем игроков по чет/нечет
+sign = ''                                           # Символ X/O
+
+def vision_pole(pole):                              # Функция отобрвжения поля
+    for k in range(0,3):
+        str_pole = ''
+        for i in range(0,3):
+            if pole[k*3+i] == '*': str_pole += str(k*3+i+1)
+            if pole[k*3+i] != '*': str_pole += pole[k*3+i]
+            if i < 2: str_pole += ' | '
+        print(str_pole)
+        print('----------')
+
+def check_win(st):
+    win_comb = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]]    #Выигрышные комбинации
+    for l in win_comb:
+        if pole[l[0]] == st and pole[l[1]] == st and pole[l[2]] == st: 
+            return 100
+
+vision_pole(pole)
+res = 0
+while res != -1:
+    if step%2 == 0: sign = 'O'
+    else: sign = 'X'
+    a = input(f'Ход {step} для {sign}, выберите поле: ')
+    if a.isdigit():
+        a = int(a)
+        if a > 0 and a < 10:
+            a -= 1
+            if str(pole[a]) != '*': 
+                print('Эта ячейка уже занята !')
+                step -= 1
+            else: pole = pole[:a] + sign + pole[a+1:]
+            vision_pole(pole)
+            if check_win(sign) == 100:
+                print(f'Победу одержали {sign} на {step} ходу ')
+                print(f'Игра закончена!')
+                break
+            step += 1
+            if step == 10: 
+                res = -1
+                print(f'Игра закончена! Ничья! ')
 
 
 # 3. Вот вам текст:

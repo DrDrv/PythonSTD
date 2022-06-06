@@ -2,7 +2,7 @@
 # 1. Напишите программу, удаляющую из текста все слова содержащие "абв". Используйте знания с последней лекции. Выполните ее в виде функции. 
 """
 
-from gettext import find
+# from gettext import find
 
 # in_text = 'абвгдеж рабав копыто фабв Абкн абрыволк аБволк'
 # text = 'абв'
@@ -95,18 +95,29 @@ from gettext import find
 Суммой очков называется сложение порядковых номеров букв в слове. Порядковые номера смотрите в этой таблице, в третьем столбце: 
 https://www.charset.org/utf-8 Это — 16-ричная система, поищите, как правильнее и быстрее получать эти символы. С помощью reduce 
 сложите получившиеся числа и верните из функции в качестве ответа.
-"""
-# Создание двух списков
+# """
+# # Создание двух списков
 name_lang_list = ['Basic', 'C', 'Fortan', 'FoxPro', 'Java', 'Pascal', 'Delfi', 'Perl', 'PHP', 'VB', 'Phyton']
 index_lang_list = [i+1 for i in range(0,len(name_lang_list))]
 
-# Функция создаст список кортежей, состоящих из номера и языка, написанного большими буквами
+# # Функция создаст список кортежей, состоящих из номера и языка, написанного большими буквами
 def kortez_num_name(nls,ils):
-    data = [i.upper() for i in nls]
-    data = list(zip(ils,data))
+    data = list(zip(ils,[i.upper() for i in nls]))
+
     return data
 
 print(kortez_num_name(name_lang_list,index_lang_list))
 
-#def
+def utf_kort(task,num):
+    temp = []
+    for i in task:
+        temp.append(sum([ord(i[r]) for r in range(0,len(i))])) #% task.index(i)
+        
+    print(temp)
+
+print(utf_kort(name_lang_list,index_lang_list))
+# print(ord('A'))
+# # ABCDEFG
+# # data = list[filter]
+# #def
 

@@ -100,24 +100,16 @@ https://www.charset.org/utf-8 Это — 16-ричная система, пои�
 name_lang_list = ['Basic', 'C', 'Fortan', 'FoxPro', 'Java', 'Pascal', 'Delfi', 'Perl', 'PHP', 'VB', 'Phyton']
 index_lang_list = [i+1 for i in range(0,len(name_lang_list))]
 
-# # Функция создаст список кортежей, состоящих из номера и языка, написанного большими буквами
+# Функция создаст список кортежей, состоящих из номера и языка, написанного большими буквами
 def kortez_num_name(nls,ils):
     data = list(zip(ils,[i.upper() for i in nls]))
-
     return data
 
+# Функция создаст список кортежей, состоящих из суммы очков и языка
+def utf_kort(nls,ils):
+    t_l=[(sum([ord(i[r]) for r in range(0,len(i))])) for i in nls]
+    t_l=[(t_l[i],nls[i]) for i in range(len(ils)) if t_l[i]%ils[i] == 0]
+    return t_l
+
 print(kortez_num_name(name_lang_list,index_lang_list))
-
-def utf_kort(task,num):
-    temp = []
-    for i in task:
-        temp.append(sum([ord(i[r]) for r in range(0,len(i))])) #% task.index(i)
-        
-    print(temp)
-
 print(utf_kort(name_lang_list,index_lang_list))
-# print(ord('A'))
-# # ABCDEFG
-# # data = list[filter]
-# #def
-

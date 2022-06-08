@@ -2,26 +2,49 @@
 # Пример: 2+2 => 4; 1+2*3 => 7; 1-2*3 => -5;
 # Дополнительно: Добавить возможность использования скобок, меняющих приоритет операций. 
 # Пример: 1+2*3 => 7; (1+2)*3 => 9;
+from operator import index
+
+
 print(' ================================')
 print('Консольный калькулятор')
 print('')
-operand = ['*','/','+','-']
+operand = ['*','/','+','-', '(',')']
 formula = (input(f'Введите выражение: ')).replace(' ','')
-temp = ''
-form = []
-for i in range(0,len(formula)):
-    if formula[i] in operand:
-        form.append(temp)
-        temp = ''
-        form.append(formula[i])
-    else: 
-        temp += formula[i]
-form.append(temp)
 
+# Функция разбивает выражение на числа и операторы и закидывает все это в список
+def dev_form(f_la,op_nd):
+    tmp = ''
+    list_f_la = []
+    for i in range(0,len(f_la)):
+        if f_la[i] in op_nd:
+            if tmp != '': list_f_la.append(tmp)
+            tmp = ''
+            list_f_la.append(f_la[i])
+        else: 
+            tmp += f_la[i]
+    if tmp != '':list_f_la.append(tmp)
+    return list_f_la
 
+def calc(f_la, op_nd):
+    new_formula = []
+    for i in f_la:
+        if i == '*':
+            k = f_la.index(i)
+            new_formula.append(int(f_la[k-1]) * int(f_la[k+1]))
+        if i == '/':
+            k = form.index(i)
+            new_formula.append(int(f_la[k-1]) / int(f_la[k+1]))
+        if i == '+':
+            k = form.index(i)
+            new_formula.append(int(f_la[k-1]) + int(f_la[k+1]))
+        if i == '-':
+            k = form.index(i)
+            new_formula.append(int(f_la[k-1]) - int(f_la[k+1]))
 
-
-print(form)
+    rez = 0
+    return rez
+print(dev_form(formula,operand))
+#print(str(new_formula))
 
 # 2 - Реализовать RLE алгоритм. реализовать модуль сжатия и восстановления данных. Входные и выходные данные хранятся в отдельных файлах (в одном файлике отрывок из какой-то книги, а втором файлике — сжатая версия этого текста). 
 # print(' ================================')

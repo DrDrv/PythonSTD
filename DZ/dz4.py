@@ -1,6 +1,6 @@
 # Дан список чисел. Создать список, в который попадают числа, описываемые возрастающую последовательность. 
 # Пример: [1, 5, 2, 3, 4, 6, 1, 7] => [1, 2, 3] или [1, 7] или [1, 6, 7] и т.д. Порядок элементов менять нельзя
-list_in = [1, 5, 2, 3, 4, 6, 1, 7]
+list_in = [9,5,1,3,4,5,6,7] #[1, 5, 2, 3, 4, 6, 1, 7]
 print(f'Входящий лист - {list_in}')
 def split_list(li):
     lo = []
@@ -16,9 +16,9 @@ def split_list(li):
         if len(loi) > 1: 
             lo.append(loi)
             a=loi
-        min = int(li[-k])
+        min = int(li[len(li)-1])
         loi = []
-        loi.append(str(li[-k]))
+        loi.append(str(min))
         for i in range(length_li-1-k,-1,-1):        # Прогоняем справа на лево если предыдущий Больше следующего - забираем 
             if li[i] < min:
                 loi.insert(0,str(li[i]))
@@ -42,9 +42,9 @@ print(f'Возрастающие последовательности {rezultat}
 
 
 # Задача 3
-max_len = len(rezultat[0])          # Находим максимальную по длине возврастающую последовательность
+max_len = len(rezultat[0])      # Находим максимальную по длине возврастающую последовательность
+rez = rezultat[0]          
 for i in rezultat:
-    
     if max_len < len(i):
         max_len = len(i)
         rez = i 
@@ -71,17 +71,13 @@ with open(filename,'r') as f:
     in_list = list(map(int, f.readlines()))
     
 def bubble_sort(lst):          # Сортировка пузырком - ничего нового 
-    
-    #swapped = False
     for i in range(len(lst)-1,0,-1):
         for j in range(i):
             if lst[j]>lst[j+1]:
                 lst[j], lst[j+1] = lst[j+1], lst[j]
-
     return lst
 
 in_list = bubble_sort(in_list)
 print(in_list)
-
 with open(filename,'w') as f:
     f.write("\n".join(map(str,in_list)))

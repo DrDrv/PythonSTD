@@ -4,9 +4,7 @@
 # Пример: 1+2*3 => 7; (1+2)*3 => 9;
 # from operator import index
 
-
-from unittest import result
-
+#from unittest import result
 
 print(' ================================')
 print('Консольный калькулятор')
@@ -28,120 +26,157 @@ def dev_form(f_la,op_nd):
     if tmp != '':list_f_la.append(tmp)
     return list_f_la
 
-def calc(f_la):
-    new_formula = []
+def sub_calc_muldiv(f_la):
+    f = []
     for i in f_la:
-        if i == '*':
-            k = f_la.index(i)
-            new_formula.append(int(f_la[k-1]) * int(f_la[k+1]))
-        if i == '/':
-            k = f_la.index(i)
-            new_formula.append(int(f_la[k-1]) / int(f_la[k+1]))
-        if i == '+':
-            k = f_la.index(i)
-            new_formula.append(int(f_la[k-1]) + int(f_la[k+1]))
-        if i == '-':
-            k = f_la.index(i)
-            new_formula.append(int(f_la[k-1]) - int(f_la[k+1]))
-    print(new_formula)
+        if i != '(' and i != ')':
+            f.append(i)
+    i = len(f)-1
+    while i >= 0:
+        if f[i] == '*': 
+            f[i] = float(f[i-1]) * float(f[i+1])
+            del f[i+1]
+            del f[i-1]
+        i-=1
+    i = len(f)-1
+    while i >= 0:
+        if f[i] == '/': 
+            f[i] = float(f[i-1]) / float(f[i+1])
+            del f[i+1]
+            del f[i-1]
+        i-=1
+    i = len(f)-1
+    while i >= 0:
+        if f[i] == '+': 
+            f[i] = float(f[i-1]) + float(f[i+1])
+            del f[i+1]
+            del f[i-1]
+        i-=1
+    i = len(f)-1
+    while i >= 0:
+        if f[i] == '-': 
+            f[i] = float(f[i-1]) - float(f[i+1])
+            del f[i+1]
+            del f[i-1]
+        i-=1
+    f = str(f[0])
+    return f
 
-
-    return new_formula
+def find_sub_form(f_la):
+    count = 0           # Количество найденных скобок
+    i = 0
+    while i < len(f_la):
+        if f_la[i] == '(':
+            r = i + 1
+            while r > i and r < len(f_la):
+                if f_la[r] == '(':
+                    i = r
+                elif f_la[r] == ')':
+                    sub_res = sub_calc_muldiv(f_la[i:r+1])
+                    del f_la[i+1:r+1]
+                    f_la[i] = sub_res
+                    i = 0
+                    r = 0
+                r +=1
+        i += 1
+    f_la = sub_calc_muldiv(f_la)
+    return f_la
 
 resultat = dev_form(formula,operand)
-print(resultat)
-resultat = str(calc(resultat)[0])
-print(resultat)
+a = find_sub_form(resultat)
+print(f'{formula} = {a}')
 
 # 2 - Реализовать RLE алгоритм. реализовать модуль сжатия и восстановления данных. Входные и выходные данные хранятся в отдельных файлах (в одном файлике отрывок из какой-то книги, а втором файлике — сжатая версия этого текста). 
-# print(' ================================')
-# print('RLE алгоритм')
-# print('')
-# filename_in = 'dz6_book.txt'
-# filename_out = 'dz6_encodebook.txt'
-# filename_or = 'dz6_decodebook.txt'
+print(' ================================')
+print('RLE алгоритм')
+print('')
+filename_in = 'dz6_book.txt'
+filename_out = 'dz6_encodebook.txt'
+filename_or = 'dz6_decodebook.txt'
 
 # Функция просто отображения оригинального текста в файле, ну для себя и проверки
-# def orig_text(file):
-#     with open(file,'r') as f:
-#         for i in f:
-#             txt = ''.join(str(i)) 
-#     return(txt)   
-# # Просто нашел алгоритм как он работает и по правилам описал здесь
-# def encode_text(file_in,file_out):
-#     with open(file_in,'r') as f:
-#         for i in f:
-#             txt = ''.join(str(i))
-#     enc_str = ""
-#     i = 0
-#     while (i <= len(txt)-1):
-#         count = 1
-#         ch = txt[i]
-#         j = i
-#         while (j < len(txt)-1):  
-#             if (txt[j] == txt[j + 1]): 
-#                 count += 1
-#                 j += 1
-#             else: 
-#                 break
-#         enc_str += str(count) + ch
-#         i = j + 1
-#     with open(file_out,'w') as f:
-#         f.write(enc_str) 
-#     return enc_str # Вывод в консоль - просто что б видеть
-# # Разжатие по правилам
-# def decode_text(file_out,file_r):
-#     with open(file_out,'r') as f:
-#         for i in f:
-#             txt = ''.join(str(i))    
-#     dec_str = ""
-#     i = 0
-#     j = 0
-#     while (i <= len(txt) - 1):
-#         count = int(txt[i])
-#         word = txt[i + 1]
-#         for j in range(count):
-#             dec_str += word
-#             j = j + 1
-#         i = i + 2
-#     with open(file_r,'w') as f:
-#         f.write(dec_str)
-#     return dec_str # Вывод в консоль - просто что б видеть
+def orig_text(file):
+    with open(file,'r') as f:
+        for i in f:
+            txt = ''.join(str(i)) 
+    return(txt)   
 
-# print(f'Оригинальный текст: \n {orig_text(filename_in)}')
-# print('')
-# print(f'Сжатый текст: \n {encode_text(filename_in,filename_out)}')
-# print('')
-# print(f'Вернули текст: \n {decode_text(filename_out,filename_or)}')
-# print('')
+# Просто нашел алгоритм как он работает и по правилам описал здесь
+def encode_text(file_in,file_out):
+    with open(file_in,'r') as f:
+        for i in f:
+            txt = ''.join(str(i))
+    enc_str = ""
+    i = 0
+    while (i <= len(txt)-1):
+        count = 1
+        ch = txt[i]
+        j = i
+        while (j < len(txt)-1):  
+            if (txt[j] == txt[j + 1]): 
+                count += 1
+                j += 1
+            else: 
+                break
+        enc_str += str(count) + ch
+        i = j + 1
+    with open(file_out,'w') as f:
+        f.write(enc_str) 
+    return enc_str # Вывод в консоль - просто что б видеть
+
+# Разжатие по правилам
+def decode_text(file_out,file_r):
+    with open(file_out,'r') as f:
+        for i in f:
+            txt = ''.join(str(i))    
+    dec_str = ""
+    i = 0
+    j = 0
+    while (i <= len(txt) - 1):
+        count = int(txt[i])
+        word = txt[i + 1]
+        for j in range(count):
+            dec_str += word
+            j = j + 1
+        i = i + 2
+    with open(file_r,'w') as f:
+        f.write(dec_str)
+    return dec_str # Вывод в консоль - просто что б видеть
+
+print(f'Оригинальный текст: \n {orig_text(filename_in)}')
+print('')
+print(f'Сжатый текст: \n {encode_text(filename_in,filename_out)}')
+print('')
+print(f'Вернули текст: \n {decode_text(filename_out,filename_or)}')
+print('')
 
 
 # 3 -  ROT13 - это простой шифр подстановки букв, который заменяет букву буквой, которая идет через 13 букв после нее в алфавите. ROT13 является примером шифра Цезаря.
 # Создайте функцию, которая принимает строку и возвращает строку, зашифрованную с помощью Rot13 . Если в строку включены числа или специальные символы, они должны быть
 # возвращены как есть. Также создайте функцию, которая расшифровывает эту строку обратно (некий начальный аналог шифрования сообщений). 
 # Не использовать функцию encode.
-# print(' ================================')
-# print(' Шифрование ROT 13')
-# print('')
-# text = 'This is an encrypted message.'
-# alphavit = [ 'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z' ]
+print(' ================================')
+print(' Шифрование ROT 13')
+print('')
+text = 'This is an encrypted message.'
+alphavit = [ 'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z' ]
              
 
-# print(f'Исходный текст: {text}')
+print(f'Исходный текст: {text}')
 
-# def encodecod(txt,al_t):
-#     data = txt
-#     for i in al_t:
-#         for k in range(len(txt)):
-#             if i == txt[k]:
-#                 if (al_t.index(i) > 0 and al_t.index(i) < 13) or (al_t.index(i) > 25 and al_t.index(i) < 39):
-#                     data = data[:k] + al_t[al_t.index(i)+13] + data[k+1:]
-#                 if (al_t.index(i) > 12 and al_t.index(i) < 26) or (al_t.index(i) > 38 and al_t.index(i) < 52):
-#                     data = data[:k] + al_t[al_t.index(i)-13] + data[k+1:]
-#     return data
+def encodecod(txt,al_t):
+    data = txt
+    for i in al_t:
+        for k in range(len(txt)):
+            if i == txt[k]:
+                if (al_t.index(i) > 0 and al_t.index(i) < 13) or (al_t.index(i) > 25 and al_t.index(i) < 39):
+                    data = data[:k] + al_t[al_t.index(i)+13] + data[k+1:]
+                if (al_t.index(i) > 12 and al_t.index(i) < 26) or (al_t.index(i) > 38 and al_t.index(i) < 52):
+                    data = data[:k] + al_t[al_t.index(i)-13] + data[k+1:]
+    return data
 
-# en_text = encodecod(text,alphavit)
-# print(f'Зашифрованное сообщение: {en_text}')
+en_text = encodecod(text,alphavit)
+print(f'Зашифрованное сообщение: {en_text}')
 
-# en_text = encodecod(en_text,alphavit)
-# print(f'Расшифрованное сообщение: {en_text}')
+en_text = encodecod(en_text,alphavit)
+print(f'Расшифрованное сообщение: {en_text}')

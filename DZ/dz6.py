@@ -33,15 +33,15 @@ def sub_calc_muldiv(f_la):
             f.append(i)
     i = len(f)-1
     while i >= 0:
-        if f[i] == '*': 
-            f[i] = float(f[i-1]) * float(f[i+1])
+        if f[i] == '/': 
+            f[i] = float(f[i-1]) / float(f[i+1])
             del f[i+1]
             del f[i-1]
         i-=1
     i = len(f)-1
     while i >= 0:
-        if f[i] == '/': 
-            f[i] = float(f[i-1]) / float(f[i+1])
+        if f[i] == '*': 
+            f[i] = float(f[i-1]) * float(f[i+1])
             del f[i+1]
             del f[i-1]
         i-=1
